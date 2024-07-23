@@ -92,7 +92,8 @@ const SongList: React.FC = () => {
             <>
               {songs.map((song: any) => (
                 <div key={song.id} css={songCardStyles}>
-                  <div>
+                  <div className="card-image"></div>
+                  <div className="card-content">
                     <h1>{song.title}</h1>
                     <p>{song.artist}</p>
                     <p>{song.genre}</p>
