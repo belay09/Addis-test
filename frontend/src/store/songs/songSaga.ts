@@ -21,7 +21,7 @@ function* fetchSongsHandler(action: ReturnType<typeof fetchSongsStart>) {
     const { page, pageSize, searchQuery } = action.payload;
 
     // Construct the API URL with pagination and search parameters
-    const apiUrl = `https://addis-software-song-api.onrender.com/api/v1/songs?page=${page}&pageSize=${pageSize}&search=${searchQuery}`;
+    const apiUrl = `https://addis-test-mhhr.onrender.com/api/v1/songs?page=${page}&pageSize=${pageSize}&search=${searchQuery}`;
 
     const { data } = yield call(axios.get, apiUrl);
     yield put(fetchSongs(data));
@@ -35,7 +35,7 @@ function* addSongHandler(action: ReturnType<typeof addSong>) {
     const notify = () => toast("Song added successfully!");
     const { data } = yield call(
       axios.post,
-      "https://addis-software-song-api.onrender.com/api/v1/songs",
+      "https://addis-test-mhhr.onrender.com/api/v1/songs",
       action.payload
     );
     yield put(addSongSuccess(data));
@@ -51,7 +51,7 @@ function* updateSongHandler(action: ReturnType<typeof updateSongSuccess>) {
     const notify = () => toast("Song updated successfully!");
     const { data } = yield call(
       axios.put,
-      `https://addis-software-song-api.onrender.com/api/v1/songs/${action.payload._id}`,
+      `https://addis-test-mhhr.onrender.com/api/v1/songs/${action.payload._id}`,
       action.payload
     );
     yield put(updateSongSuccess(data));
@@ -64,7 +64,7 @@ function* updateSongHandler(action: ReturnType<typeof updateSongSuccess>) {
 function* removeSongHandler(action: ReturnType<typeof removeSongSuccess>) {
   try {
     const notify = () => toast("Song removed successfully!");
-    yield call(axios.delete, `https://addis-software-song-api.onrender.com/api/v1/songs/${action.payload}`);
+    yield call(axios.delete, `https://addis-test-mhhr.onrender.com/api/v1/songs/${action.payload}`);
     yield put(startFetchStatistics())
     notify()
     yield put(removeSongSuccess(action.payload));
