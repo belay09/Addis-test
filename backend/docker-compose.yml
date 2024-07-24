@@ -1,4 +1,3 @@
-version: '3'
 services:
   addis-test-backend:
     build:
