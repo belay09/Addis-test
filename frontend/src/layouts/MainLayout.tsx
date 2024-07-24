@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Main,Container,Header } from "./styled/styled";
+import { Main,Container } from "./styled/styled";
 import Hero from "../components/hero"; // Import the Hero component
 interface MainLayoutProps {
   children: ReactNode;
