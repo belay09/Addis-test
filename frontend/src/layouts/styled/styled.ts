@@ -37,16 +37,16 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-const Header = styled.header`
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
-`;
+// const Header = styled.header`
+//   background-color: #333;
+//   color: #fff;
+//   padding: 1rem;
+//   text-align: center;
+// `;
 
 const Main = styled.main`
   padding: 10px;
 `;
 
 
-export { Container, Header, Main };
+export { Container, Main };
