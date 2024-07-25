@@ -7,4 +7,3 @@ export interface Song {
     album: string;
     genre: string;
   }
-  

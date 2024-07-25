@@ -14,7 +14,7 @@ const HomePage: React.FC = () => {
   const [showForm, setShowForm] = React.useState(false);
   return (
     <MainLayout>
-      <div css={css`display: flex; justify-content: space-between; margin-right: 10px`}>
+      <div css={css`display: flex; justify-content: space-between;`}>
         <div></div>
         <AddSongButton onClick={() => setShowForm(true)}>
           Add New Song

@@ -6,7 +6,6 @@ function* fetchStatisticsHandler() {
   try {
     const apiUrl = `https://addis-test-mhhr.onrender.com/api/v1/analytics`;
     const { data } = yield call(axios.get, apiUrl);
-    console.log("this is data", data)
     yield put(fetchStatisticsSuccess(data));
   } catch (error: any) {
     yield put(fetchStatisticsFailure(String(error.message)));

@@ -6,6 +6,10 @@ interface SongState {
   songs: Song[];
   loading: boolean;
   error: string | null;
+  songAdded: boolean;
+  songUpdated: boolean;
+
+
 }
 
 interface SongQuery {
@@ -17,34 +21,31 @@ const initialState: SongState = {
   songs: [],
   loading: false,
   error: null,
+  songAdded: false,
+  songUpdated: false,
 };
 
 const songSlice = createSlice({
   name: "songs",
   initialState,
   reducers: {
-
     addSong: (state, action: PayloadAction<Song>) => {
-      console.log("this is action", action)
-      state.loading = false;
+      console.log("action", action)
+      state.loading = true;
+      state.songAdded = false; // Reset the flag
     },
     addSongSuccess: (state, action: PayloadAction<Song>) => {
-      if (state.songs.length > 10) {
-        state.songs.pop();
-        state.songs.unshift(action.payload);
-
-      }
-      else{
-
-        state.songs.unshift(action.payload);
-      }
+      state.songs.unshift(action.payload);
       state.loading = false;
+      state.songAdded = true; // Set the flag when a song is successfully added
     },
     addSongFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
     },
-
+    resetSongAdded: (state) => {
+      state.songAdded = false;
+    },
     updateSongStart: (state, action: PayloadAction<Song>) => {
       console.log("this is action", action)
       state.loading = true;
@@ -55,11 +56,16 @@ const songSlice = createSlice({
         song._id === action.payload._id ? action.payload : song
       );
       state.loading = false;
+      state.songUpdated = true;
     },
     updateSongFailure: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
       state.loading = false;
     },
+    resetSongUpdated: (state) => {
+      state.songUpdated = false;
+    },
+
     removeSongStart: (state, _action: PayloadAction<string>) => {
       state.loading = true;
       state.error = null;
@@ -93,10 +99,12 @@ export type { SongQuery };
 export const {
     addSongSuccess,
     addSong,
+    resetSongAdded,
     addSongFailure,
     updateSongStart,
     updateSongSuccess,
     updateSongFailure,
+    resetSongUpdated,
     removeSongStart,
     removeSongSuccess,
     removeSongFailure,

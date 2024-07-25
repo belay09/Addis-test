@@ -38,9 +38,9 @@ function* addSongHandler(action: ReturnType<typeof addSong>) {
       "https://addis-test-mhhr.onrender.com/api/v1/songs",
       action.payload
     );
+    notify()
     yield put(addSongSuccess(data));
     yield put(startFetchStatistics())
-    notify()
   } catch (error: any) {
     yield put(addSongFailure(String(error.message)));
   }
@@ -55,6 +55,7 @@ function* updateSongHandler(action: ReturnType<typeof updateSongSuccess>) {
       action.payload
     );
     yield put(updateSongSuccess(data));
+    yield put(startFetchStatistics())
     notify()
   } catch (error: any) {
     yield put(updateSongFailure(String(error.message)));
@@ -68,6 +69,8 @@ function* removeSongHandler(action: ReturnType<typeof removeSongSuccess>) {
     yield put(startFetchStatistics())
     notify()
     yield put(removeSongSuccess(action.payload));
+    yield put(startFetchStatistics())
+
   } catch (error: any) {
     yield put(removeSongFailure(String(error.message)));
   }

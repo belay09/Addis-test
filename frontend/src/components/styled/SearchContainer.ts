@@ -19,8 +19,8 @@ const SearchContainer = styled.div`
   }
 
   button {
-    padding: 10px;
-    background-color: #007bff;
+    padding: 9px;
+    background-color: #694666;
     color: #fff;
     border: none;
     outline: none;

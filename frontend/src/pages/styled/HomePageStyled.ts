@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
 const AddSongButton = styled.button`
-  padding: 10px;
-  background-color: #007bff;
+padding: 8px;
+  background-color: #694666;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -10,8 +10,8 @@ const AddSongButton = styled.button`
   margin-left: auto; /* Align to the right */
 
   &:hover {
-    background-color: #0056b3;
-  }
+    background-color: #4b3450;
+}
 `;
 
 export { AddSongButton };

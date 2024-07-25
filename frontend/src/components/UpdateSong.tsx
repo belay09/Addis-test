@@ -1,8 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 
-import Back from "../assets/back.svg";
+import Back from "../assets/x.svg";
 import {
   ModalContainer,
   InputField,
@@ -11,8 +13,7 @@ import {
   Overlay,
 } from "./styled/form";
 import { SongFormProps } from "../types/Prop-types";
-import { updateSongStart } from "../store/songs/songSlice";
-import { useDispatch } from "react-redux";
+import { updateSongStart,resetSongUpdated } from "../store/songs/songSlice";
 import { Song } from "../types/Song";
 
 const UpdateSongForm: React.FC<SongFormProps> = ({
@@ -40,10 +41,10 @@ const UpdateSongForm: React.FC<SongFormProps> = ({
       album: album,
       genre: genre,
     };
-
     dispatch(updateSongStart(song));
   };
-
+  const loading = useSelector((state: any) => state.songs.loading);
+  const songUpdated = useSelector((state: any) => state.songs.songUpdated);
   // Use useEffect to update the state when props change
   useEffect(() => {
     setTitle(initialTitle || "");
@@ -52,6 +53,16 @@ const UpdateSongForm: React.FC<SongFormProps> = ({
     setGenre(initialGenre || "");
     setId(initialId || "");
   }, [initialTitle, initialArtist, initialAlbum, initialGenre]);
+  useEffect(() => {
+    if (songUpdated) {
+      setTitle("");
+      setArtist("");
+      setAlbum("");
+      setGenre("");
+      onBackClick();
+      dispatch(resetSongUpdated()); // Reset the songAdded flag
+    }
+  }, [songUpdated, onBackClick, dispatch]);
 
   return (
     <>
@@ -60,23 +71,24 @@ const UpdateSongForm: React.FC<SongFormProps> = ({
         <div
           css={css`
             display: flex;
+
             justify-content: space-between;
           `}
         >
-          <div></div>
-          <BackButton onClick={onBackClick}>
-            <img src={Back} alt="" />
-          </BackButton>
-        </div>
-        <div
+<div
           css={css`
             margin-bottom: 15px;
             font-size: 20px;
             font-weight: bold;
+            color: #4b3450;
           `}
         >
-          Add New Song
+          Update New Song
+        </div>          <BackButton onClick={onBackClick}>
+            <img src={Back} alt="" />
+          </BackButton>
         </div>
+        
         <form onSubmit={handleSubmit}>
           <label
             htmlFor="title"
@@ -138,8 +150,14 @@ const UpdateSongForm: React.FC<SongFormProps> = ({
             value={genre}
             onChange={(e) => setGenre(e.target.value)}
           />
-          <SubmitButton type="submit">Submit</SubmitButton>
-          <BackButton onClick={onBackClick}>Back</BackButton>
+          <SubmitButton type="submit">
+          {loading ? (
+              <ClipLoader size={14} color={"#fff"} />
+            ) : (
+              <div>Submit</div>
+            )}      
+          </SubmitButton>
+          {/* <BackButton onClick={onBackClick}>Back</BackButton> */}
         </form>
       </ModalContainer>
       <Overlay />

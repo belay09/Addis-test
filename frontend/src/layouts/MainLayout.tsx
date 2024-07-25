@@ -7,13 +7,9 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <Container>
-      <div>
-      <Hero /> {/* Use the Hero component instead of the Header */}
-
+      <Hero /> 
         <Main>{children}</Main>
-      </div>
     </Container>
   );
 };
-
 export default MainLayout;

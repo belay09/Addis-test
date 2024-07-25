@@ -12,10 +12,29 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+::-webkit-scrollbar {
+ 
+  display: none;
 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4b3450;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* For Firefox */
+body {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: 4b3450 #f1f1f1; /* thumb and track color */
+}
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #694666;
   text-decoration: inherit;
 }
 a:hover {

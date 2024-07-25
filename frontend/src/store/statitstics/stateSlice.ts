@@ -1,18 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AnalyticsData } from "../../types/Statitstics-type";
-interface SongState {
+interface statisticsState {
   statistics: AnalyticsData;
   loading: boolean;
   error: string | null;
 }
 
-
-const initialState: SongState = {
+ 
+const initialState: statisticsState = {
     statistics: {} as AnalyticsData,
     loading: false,
     error: null,
   };
-  
 const stateSlice = createSlice({
   name: "statistics",
   initialState,
