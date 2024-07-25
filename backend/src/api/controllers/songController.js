@@ -28,7 +28,7 @@ export const listSongs = async (req, res) => {
   try {
     const { page = 1, pageSize = 10, search } = req.query;
 
-    const query = search ? { title: { $regex: new RegExp(search, 'i') } } : {};
+    const query = search ? { genre: { $regex: new RegExp(search, 'i') } } : {};
 
     const songs = await Song.find(query)
       .skip((page - 1) * pageSize)
