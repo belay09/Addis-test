@@ -45,17 +45,17 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ data, title }) =>
         blur: 1,
         opacity: 0.45,
       },
-      formatter: function (val, opts) {
+      formatter: function (val) {
         const value = typeof val === 'number' ? val : parseFloat(val as string);
         return value.toFixed(1) + '%';
       },
     },
     tooltip: {
       y: {
-        formatter: function (val, { seriesIndex, dataPointIndex }) {
+        formatter: function (val, { seriesIndex }) {
           const label = labels[seriesIndex];
           const value = series[seriesIndex];
-          return `${label}: ${value}`;
+          return `${label}: ${value} (${val})`;
         }
       }
     },
@@ -84,7 +84,6 @@ const PieChartComponent: React.FC<PieChartComponentProps> = ({ data, title }) =>
       },
     ],
   };
-
   return (
     <div
       css={css`
